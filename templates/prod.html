@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bike_Information</title>
+</head>
+              <h1>Welcome </h1>
+              {{amsg}}
+<body>
+     '''
+     Value : {{a}}
+     '''
+    <form action="http://localhost:5000/prod/save/" method="post">
+        <br><br>
+        Enter Product ID:<input type="text" name="id" readonly value="{{prod.id}}"><br>
+        Enter Product Name:<input type="text" name="pname" value="{{prod.pname}}"><br>
+        Enter Product qyantity:<input type="text" name="pqty" value="{{prod.pqty}}"><br>
+              <input type="submit">
+    </form>
+       {% if products %}
+          <table border="2">
+                      <thead>
+                      <td>Product_ID</td>
+                      <td>Product_Name</td>
+                      <td>Product_QUANTITY</td>
+                      <td>ACTION</td>
+                      </thead>
+              {% for prod in products %}
+                      <tbody>
+                      <td>{{prod.id}}</td>
+                      <td>{{prod.pname}}</td>
+                      <td>{{prod.pqty}}</td>
+                      <td>
+                          <a href="/prod/edit/{{prod.id}}">EDIT</a>|
+                          <a href="/prod/delete/{{prod.id}}">DELETE</a>
+                      </td>
+                      </tbody>
+              {% endfor %}
+
+          </table>
+       {% endif %}
+</body>
+</html>

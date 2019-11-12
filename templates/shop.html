@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop info</title>
+
+</head>
+<h1>welcome</h1>
+{{msg}}
+<body>
+     <form action="http://localhost:5000/shop/save/" method="post">
+         <br><br>
+         Enter shop id:<input type="text" name="id" value="{{shop.id}}" readonly><br>
+         Enter shop name:<input type="text" name="sname" value="{{shop.sname}}"><br>
+         Enter shop adrs:<input type="text" name="sadr" value="{{shop.sadr}}"><br>
+         Enter shop owner:<input type="text" name="sowner" value="{{shop.sowner}}"><br>
+         Product List<select name="produ" multiple>
+               {% for prod in products %}
+
+               {% if prod.shop is none %}
+                   <option value="{{prod.id}}">{{prod.pname}}<<{{prod.id}}</option>
+               {% elif prod.shop.id==shop.id %}
+                   <option selected value="{prod.id}">{{prod.pname}}<<{{prod.id}}</option>
+               {% endif %}
+               {% endfor %}
+                   </select><br><br>
+         <input type="submit">
+     </form>
+
+         <table>
+             <thead>
+             <td>ID</td>
+             <td>NAME</td>
+             <td>ADR</td>
+             <td>owner</td>
+             <td>ACTION</td>
+             </thead>
+
+             {% for shop in shops %}
+             <tbody>
+             <td>{{shop.id}}</td>
+             <td>{{shop.pname}}</td>
+             <td>{{shop.padr}}</td>
+             <td>{{shop.powner}}</td>
+             <td>
+                 <a href="/shop/edit/{{shop.id}}">EDIT</a>|
+                 <a href="/shop/delete/{{shop.id}}">DELETE</a>
+             </td>
+             </tbody>
+             {% endfor %}
+         </table>
+</body>
+</html>
